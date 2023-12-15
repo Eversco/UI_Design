@@ -15,9 +15,11 @@ public class ThirdPersonMorphController : MonoBehaviour
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform playerCameraRoot;
+    [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
+    private GameObject currentMorphObject;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +42,25 @@ public class ThirdPersonMorphController : MonoBehaviour
         {
             debugTransform.position = rayCastHit.point;
             mouseWorldPosition = rayCastHit.point;
-
+            
             if (starterAssetsInputs.morph)
             {
-                if(rayCastHit.transform.gameObject.GetComponent<MorphTarget>() != null)
+                GameObject targetObject = rayCastHit.transform.gameObject;
+                if (targetObject.GetComponent<MorphTarget>() != null)
                 {
                     Debug.Log("Morphable");
+                    if (currentMorphObject != null)
+                    {
+                        Destroy(currentMorphObject);
+                    }
+                    playerMeshRenderer.enabled = false;
+                    currentMorphObject = Instantiate(targetObject);
+                    currentMorphObject.transform.parent = transform;
+                    if(currentMorphObject.TryGetComponent(out BoxCollider boxCollider))
+                    {
+                        boxCollider.isTrigger = true;
+                    }
+                    
                 }
                 else
                 {
@@ -69,6 +84,10 @@ public class ThirdPersonMorphController : MonoBehaviour
         //transform.forward = aimDirection;
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 5f);
 
-        
+        //debug
+        if(currentMorphObject != null)
+        {
+            currentMorphObject.transform.position = transform.position;
+        }
     }
 }
