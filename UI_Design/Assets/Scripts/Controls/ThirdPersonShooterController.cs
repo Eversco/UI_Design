@@ -16,9 +16,12 @@ public class ThirdPersonShooterController: MonoBehaviour
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private Transform playerCameraRoot;
+    [SerializeField] private List<WeaponSO> weapons;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
+    private IWeapon currentWeapon;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,5 +79,24 @@ public class ThirdPersonShooterController: MonoBehaviour
             //Works as a semi auto gun. Have to repress mb1 to shoot again
             starterAssetsInputs.shoot = false;
         }
+
+        //will definitely refactor lol
+        if(starterAssetsInputs.equipWeapon1)
+        {
+
+        }
+        if(starterAssetsInputs.equipWeapon2)
+        {
+
+        }
+        if(starterAssetsInputs.equipWeapon3)
+        {
+
+        }
+        
+    }
+    public void EquipWeapon(IWeapon weapon)
+    {
+        currentWeapon = weapon;
     }
 }

@@ -15,6 +15,9 @@ namespace StarterAssets
 		public bool aim;
 		public bool shoot;
 		public bool morph;
+		public bool equipWeapon1;
+		public bool equipWeapon2;
+		public bool equipWeapon3;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -31,7 +34,7 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -59,13 +62,25 @@ namespace StarterAssets
 		{
 			MorphInput(value.isPressed);
 		}
+		public void OnEquipWeapon1(InputValue value)
+		{
+			EquipWeapon1Input(value.isPressed);
+		}
+        public void OnEquipWeapon2(InputValue value)
+        {
+            EquipWeapon2Input(value.isPressed);
+        }
+        public void OnEquipWeapon3(InputValue value)
+        {
+            EquipWeapon3Input(value.isPressed);
+        }
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
-		} 
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
@@ -93,10 +108,23 @@ namespace StarterAssets
 		}
 		public void MorphInput(bool newMorphState)
 		{
-			morph = newMorphState;	
+			morph = newMorphState;
 		}
+		public void EquipWeapon1Input(bool newEquipState)
+		{ 
+			equipWeapon1 = newEquipState;
+		}
+        public void EquipWeapon2Input(bool newEquipState)
+        {
+            equipWeapon2 = newEquipState;
+        }
+        public void EquipWeapon3Input(bool newEquipState)
+        {
+            equipWeapon3 = newEquipState;
+        }
 
-		private void OnApplicationFocus(bool hasFocus)
+
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}

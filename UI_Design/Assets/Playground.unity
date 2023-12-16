@@ -1784,6 +1784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestSeeker
       objectReference: {fileID: 0}
+    - target: {fileID: 5388067486857620108, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
       propertyPath: debugTransform
       value: 
@@ -1792,6 +1796,22 @@ PrefabInstance:
       propertyPath: aimVirtualCamera
       value: 
       objectReference: {fileID: 2070925443445054503}
+    - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
+      propertyPath: weapons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 797a10b4b1f07654b90c19e87e8620db, type: 2}
+    - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c40af77dcc72ac4da9014c2aab32b51, type: 2}
+    - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
+      propertyPath: weapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d1ac59d974f30c4787f48a18d66fec2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1970,6 +1990,10 @@ PrefabInstance:
     - target: {fileID: 3313030486017777946, guid: 7353382749829b9448c784322f142260, type: 3}
       propertyPath: m_Name
       value: TestHider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313030486017777946, guid: 7353382749829b9448c784322f142260, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792850123545068921, guid: 7353382749829b9448c784322f142260, type: 3}
       propertyPath: m_IsActive
