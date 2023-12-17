@@ -1036,6 +1036,8 @@ GameObject:
   - component: {fileID: 5680910263035010336}
   - component: {fileID: 1268534740812727283}
   - component: {fileID: 5215608977531596554}
+  - component: {fileID: 8923785533789679598}
+  - component: {fileID: -699934437638933720}
   m_Layer: 8
   m_Name: TestHider
   m_TagString: Player
@@ -1187,6 +1189,10 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   shoot: 0
+  morph: 0
+  equipWeapon1: 0
+  equipWeapon2: 0
+  equipWeapon3: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -1310,6 +1316,39 @@ MonoBehaviour:
   pfBulletProjectile: {fileID: 0}
   spawnBulletPosition: {fileID: 0}
   playerCameraRoot: {fileID: 0}
+  weapons: []
+--- !u!114 &8923785533789679598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313030486017777946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 621562169
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-699934437638933720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313030486017777946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188103cb548d44e46833ffa6ba43ca85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3410175332271096629
 GameObject:
   m_ObjectHideFlags: 0
