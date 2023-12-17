@@ -7,7 +7,7 @@ using UnityEditor.ShaderGraph.Internal;
 
 public class ThirdPersonShooterController: MonoBehaviour
 {
-
+    [SerializeField] private CinemachineVirtualCamera normalVirtualCamera;
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
@@ -20,7 +20,7 @@ public class ThirdPersonShooterController: MonoBehaviour
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
-    private IWeapon currentWeapon;
+    private Weapon currentWeapon;
 
 
     // Start is called before the first frame update
@@ -59,16 +59,20 @@ public class ThirdPersonShooterController: MonoBehaviour
         //transform.forward = aimDirection;
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
 
-        if (starterAssetsInputs.aim)
+        if(currentWeapon != null)
         {
-            aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity);
+            if (starterAssetsInputs.aim)
+            {
+                currentWeapon.AimDownSights();
+                thirdPersonController.SetSensitivity(aimSensitivity);
+            }
+            else
+            {
+                currentWeapon.ExitADS();
+                thirdPersonController.SetSensitivity(normalSensitivity);
+            }
         }
-        else
-        {
-            aimVirtualCamera.gameObject.SetActive(false);
-            thirdPersonController.SetSensitivity(normalSensitivity);
-        }
+        
 
 
         if(starterAssetsInputs.shoot)
@@ -100,7 +104,7 @@ public class ThirdPersonShooterController: MonoBehaviour
         
         
     }
-    public void EquipWeapon(IWeapon weapon)
+    public void EquipWeapon(Weapon weapon)
     {
         
         if(weapon == currentWeapon)
@@ -114,7 +118,7 @@ public class ThirdPersonShooterController: MonoBehaviour
             currentWeapon.Unequip(spawnBulletPosition);
         }
         currentWeapon = weapon;
-
+        currentWeapon.Initialize(aimVirtualCamera, normalVirtualCamera);
         currentWeapon.Equip(spawnBulletPosition);
 
     }

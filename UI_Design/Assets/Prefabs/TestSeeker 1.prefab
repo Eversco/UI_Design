@@ -1947,6 +1947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000678d13b7aa6940b926bbee547522a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalVirtualCamera: {fileID: 7065898300955640564}
   aimVirtualCamera: {fileID: 9109913349099144865}
   normalSensitivity: 1
   aimSensitivity: 0.66
@@ -1958,7 +1959,9 @@ MonoBehaviour:
   spawnBulletPosition: {fileID: 7643006660273810837}
   playerCameraRoot: {fileID: 7234359266214441167}
   weapons:
-  - {fileID: 0}
+  - {fileID: -1278531813471572699, guid: 748d19574625db444877ca05561b6aea, type: 3}
+  - {fileID: 5617895005348352729, guid: 7444562fe5798e846a4045a93e123308, type: 3}
+  - {fileID: -7793784983020395614, guid: c9841888fa5041d499ada59f73087c6a, type: 3}
 --- !u!1 &5529429972795308484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,6 +2934,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 715007836886872566, guid: e25cc187bc736374897e168002ef3024, type: 3}
   m_PrefabInstance: {fileID: 5563012051003051930}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7065898300955640564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3403829533197880686, guid: e25cc187bc736374897e168002ef3024, type: 3}
+  m_PrefabInstance: {fileID: 5563012051003051930}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6957196025441888378
 PrefabInstance:
   m_ObjectHideFlags: 0
