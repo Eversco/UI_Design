@@ -1188,6 +1188,10 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   shoot: 0
+  morph: 0
+  equipWeapon1: 0
+  equipWeapon2: 0
+  equipWeapon3: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -1286,7 +1290,7 @@ MonoBehaviour:
     m_ActionName: UI/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Seeker
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &4523139366846529165

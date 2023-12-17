@@ -6,6 +6,8 @@ public interface IWeapon
 {
     void Shoot();
     void AimDownSights();
-    
+    public string GetWeaponName();
+    public void Unequip(Transform parent);
+    public void Equip(Transform parent);
 }
 

@@ -16,7 +16,7 @@ public class ThirdPersonShooterController: MonoBehaviour
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private Transform playerCameraRoot;
-    [SerializeField] private List<WeaponSO> weapons;
+    [SerializeField] private List<Weapon> weapons;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -83,20 +83,39 @@ public class ThirdPersonShooterController: MonoBehaviour
         //will definitely refactor lol
         if(starterAssetsInputs.equipWeapon1)
         {
-
+            EquipWeapon(weapons[0]);
+            starterAssetsInputs.equipWeapon1 = false;
         }
         if(starterAssetsInputs.equipWeapon2)
         {
-
+            EquipWeapon(weapons[1]);
+            starterAssetsInputs.equipWeapon2 = false;
         }
         if(starterAssetsInputs.equipWeapon3)
         {
-
+            EquipWeapon(weapons[2]);
+            starterAssetsInputs.equipWeapon3 = false;
         }
+
+        
         
     }
     public void EquipWeapon(IWeapon weapon)
     {
+        
+        if(weapon == currentWeapon)
+        {
+            return;
+        }
+        //new weapon, need change
+        Debug.Log(weapon.GetWeaponName());
+        if (currentWeapon != null)
+        {
+            currentWeapon.Unequip(spawnBulletPosition);
+        }
         currentWeapon = weapon;
+
+        currentWeapon.Equip(spawnBulletPosition);
+
     }
 }
