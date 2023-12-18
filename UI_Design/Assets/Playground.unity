@@ -660,7 +660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: field of view
-      value: 75
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: far clip plane
@@ -684,19 +684,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.440001
+      value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.675
+      value: 1.671
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.48
+      value: 0.242
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999446
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -704,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.0033335744
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1136,11 +1136,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!4 &1844179220 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7643006660273810837, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
-  m_PrefabInstance: {fileID: 4319280036558241993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1892159817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,10 +1558,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3033801238751161307, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
-      propertyPath: m_Name
-      value: spawnGunPosition
-      objectReference: {fileID: 0}
     - target: {fileID: 3596999437835353810, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.002
@@ -1611,18 +1602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestSeeker
       objectReference: {fileID: 0}
-    - target: {fileID: 5388067486857620108, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
       propertyPath: debugTransform
       value: 
       objectReference: {fileID: 1727183843}
-    - target: {fileID: 7222087252689726189, guid: 3c20557e50c3de549bce451a540ad3f0, type: 3}
-      propertyPath: spawnGunPosition
-      value: 
-      objectReference: {fileID: 1844179220}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1647,17 +1630,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 948056324123544441, guid: 7353382749829b9448c784322f142260, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3313030486017777946, guid: 7353382749829b9448c784322f142260, type: 3}
       propertyPath: m_Name
       value: TestHider
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313030486017777946, guid: 7353382749829b9448c784322f142260, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6793503544628667483, guid: 7353382749829b9448c784322f142260, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1157,7 +1157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7643006660273810837}
   m_Layer: 2
-  m_Name: spawnBulletPosition
+  m_Name: spawnGunPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1956,7 +1956,7 @@ MonoBehaviour:
     m_Bits: 1
   debugTransform: {fileID: 0}
   pfBulletProjectile: {fileID: 6863857337172796870, guid: 9fc5deab5fef94d41b92a7112049f302, type: 3}
-  spawnBulletPosition: {fileID: 7643006660273810837}
+  spawnGunPosition: {fileID: 7643006660273810837}
   playerCameraRoot: {fileID: 7234359266214441167}
   weapons:
   - {fileID: -1278531813471572699, guid: 748d19574625db444877ca05561b6aea, type: 3}

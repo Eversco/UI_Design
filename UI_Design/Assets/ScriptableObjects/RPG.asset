@@ -21,6 +21,7 @@ MonoBehaviour:
   firerate: 1
   zoomMultiplier: 1.2
   clipSize: 1
+  pelletCount: 1
   inaccuracy: 0.5
   penaltyMultiplier: 0.2
   fireType: 0
