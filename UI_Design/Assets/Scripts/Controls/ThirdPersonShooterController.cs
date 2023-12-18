@@ -14,7 +14,7 @@ public class ThirdPersonShooterController: MonoBehaviour
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform pfBulletProjectile;
-    [SerializeField] private Transform spawnBulletPosition;
+    [SerializeField] private Transform spawnGunPosition;
     [SerializeField] private Transform playerCameraRoot;
     [SerializeField] private List<Weapon> weapons;
 
@@ -31,6 +31,10 @@ public class ThirdPersonShooterController: MonoBehaviour
         
         //disable controller move rotation for now(rotation caused by player movement)
         thirdPersonController.SetRotateOnMove(false);
+        foreach(Weapon weapon in weapons) 
+        {
+            weapon.InitializeGunStats();
+        }
     }
 
     // Update is called once per frame
@@ -71,18 +75,20 @@ public class ThirdPersonShooterController: MonoBehaviour
                 currentWeapon.ExitADS();
                 thirdPersonController.SetSensitivity(normalSensitivity);
             }
+
+            if (starterAssetsInputs.shoot && currentWeapon.CanShoot())
+            {
+                
+                currentWeapon.Shoot(mouseWorldPosition, spawnGunPosition, pfBulletProjectile);
+                //Debug.Log(spawnGunPosition.position);
+                //Works as a semi auto gun. Have to repress mb1 to shoot again
+                starterAssetsInputs.shoot = false;
+            }
         }
         
 
 
-        if(starterAssetsInputs.shoot)
-        {
-            Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
-            Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                
-            //Works as a semi auto gun. Have to repress mb1 to shoot again
-            starterAssetsInputs.shoot = false;
-        }
+        
 
         //will definitely refactor lol
         if(starterAssetsInputs.equipWeapon1)
@@ -112,14 +118,14 @@ public class ThirdPersonShooterController: MonoBehaviour
             return;
         }
         //new weapon, need change
-        Debug.Log(weapon.GetWeaponName());
+        //Debug.Log(weapon.GetWeaponName());
         if (currentWeapon != null)
         {
-            currentWeapon.Unequip(spawnBulletPosition);
+            currentWeapon.Unequip(spawnGunPosition);
         }
         currentWeapon = weapon;
-        currentWeapon.Initialize(aimVirtualCamera, normalVirtualCamera);
-        currentWeapon.Equip(spawnBulletPosition);
+        currentWeapon.InitializeCamera(aimVirtualCamera, normalVirtualCamera);
+        currentWeapon.Equip(spawnGunPosition);
 
     }
 }
