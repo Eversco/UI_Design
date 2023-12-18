@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunModel: {fileID: 6487692186150638311, guid: c9841888fa5041d499ada59f73087c6a, type: 3}
+  vfxHit: {fileID: 613433886817584985, guid: 6e845b0e80fad2d4c93ff505a0750129, type: 3}
   equipAnim: {fileID: 0}
   fireAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
@@ -22,6 +23,6 @@ MonoBehaviour:
   zoomMultiplier: 1.2
   clipSize: 6
   pelletCount: 12
-  inaccuracy: 1.5
+  inaccuracy: 3.3
   penaltyMultiplier: 0.2
   fireType: 0

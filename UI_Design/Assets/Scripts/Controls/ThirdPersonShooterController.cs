@@ -39,6 +39,7 @@ public class ThirdPersonShooterController: MonoBehaviour
             instantiatedWeapon.GetComponent<Weapon>().InitializeGunStats();
             instantiatedWeapons.Add(instantiatedWeapon);
             instantiatedWeapon.SetActive(false);
+            instantiatedWeapon.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
             instantiatedWeapon.transform.rotation *= Quaternion.Euler(0, -90, 0);
         }
     }
@@ -47,7 +48,7 @@ public class ThirdPersonShooterController: MonoBehaviour
     void Update()
     {
 
-        Vector3 mouseWorldPosition = Vector3.zero;
+        Vector3 mouseWorldPosition;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         float debugRayDistance = 100f;
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
@@ -88,7 +89,7 @@ public class ThirdPersonShooterController: MonoBehaviour
             if (starterAssetsInputs.shoot && currentWeapon.CanShoot())
             {
                 
-                currentWeapon.Shoot(mouseWorldPosition, spawnGunPosition, pfBulletProjectile);
+                currentWeapon.Shoot(mouseWorldPosition, pfBulletProjectile, debugRayDistance, aimColliderLayerMask);
                 //Debug.Log(spawnGunPosition.position);
                 //Works as a semi auto gun. Have to repress mb1 to shoot again
                 starterAssetsInputs.shoot = false;

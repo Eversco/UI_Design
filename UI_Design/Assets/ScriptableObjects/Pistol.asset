@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   gunModel: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
+  vfxHit: {fileID: 613433886817584985, guid: 6e845b0e80fad2d4c93ff505a0750129, type: 3}
   equipAnim: {fileID: 0}
   fireAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
@@ -22,6 +23,6 @@ MonoBehaviour:
   zoomMultiplier: 1.3
   clipSize: 12
   pelletCount: 1
-  inaccuracy: 0.35
+  inaccuracy: 0.8
   penaltyMultiplier: 0.25
   fireType: 0

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -21,7 +22,7 @@ public class Weapon : MonoBehaviour
         shootCooldown -= Time.deltaTime;
         if (shootCooldown < 0f) { shootCooldown = 0f; }
     }
-    public virtual void Shoot(Vector3 mouseWorldPosition, Transform spawnGunPosition, Transform pfBulletProjectile)
+    public virtual void Shoot(Vector3 mouseWorldPosition, Transform pfBulletProjectile, float rayDistance, LayerMask targetLayer)
     {
         ammo -= 1;
         shootCooldown = 1f / weaponData.firerate;
@@ -31,8 +32,25 @@ public class Weapon : MonoBehaviour
         //Vector3 actualMuzzlePosition = transform.position + transform.rotation * muzzlePosition.position;
         Vector3 aimDir = (mouseWorldPosition - muzzlePosition.position).normalized;
         
+        for(int i = 0; i < weaponData.pelletCount; i++)
+        {
+            float angle = Random.Range(0f, 2f * Mathf.PI);
+            float distance = Mathf.Sqrt(Random.Range(0f, 1f)) * weaponData.inaccuracy;
+            float x = distance * Mathf.Cos(angle);
+            float y = distance * Mathf.Sin(angle);
 
-        Instantiate(pfBulletProjectile, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+            Ray ray = new Ray(muzzlePosition.position, Quaternion.Euler(new Vector3(x, y, 0)) * aimDir);
+            if (Physics.Raycast(ray, out RaycastHit rayCastHit, rayDistance, targetLayer))
+            {
+                Instantiate(weaponData.vfxHit, rayCastHit.point, Quaternion.identity);
+                Debug.Log("Hit " + rayCastHit.ToString() + "; Hit at" + rayCastHit.point.ToString());
+                
+            }
+            Transform bullet = Instantiate(pfBulletProjectile, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(new Vector3(x, y, 0)));
+
+            //bullet.localScale = new Vector3(0.7f, 0.7f, 1f);
+        }
+        
         
     }
 

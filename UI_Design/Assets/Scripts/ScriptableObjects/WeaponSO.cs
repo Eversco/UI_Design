@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponSO : ScriptableObject
 {
     public Transform gunModel;
+    public Transform vfxHit;
     public Animation equipAnim;
     public Animation fireAnim;
     public Animation reloadAnim;
