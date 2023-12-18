@@ -122,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 7d1ac59d974f30c4787f48a18d66fec2, type: 2}
   muzzlePosition: {fileID: 976118514034365549}
+  ammo: 6
+  shootCooldown: 0
 --- !u!1 &6549237047298830962
 GameObject:
   m_ObjectHideFlags: 0

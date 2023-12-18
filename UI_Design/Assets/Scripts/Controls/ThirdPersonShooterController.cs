@@ -17,11 +17,12 @@ public class ThirdPersonShooterController: MonoBehaviour
     [SerializeField] private Transform spawnGunPosition;
     [SerializeField] private Transform playerCameraRoot;
     [SerializeField] private List<Weapon> weapons;
+    
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private Weapon currentWeapon;
-
+    private List<GameObject> instantiatedWeapons = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +34,19 @@ public class ThirdPersonShooterController: MonoBehaviour
         thirdPersonController.SetRotateOnMove(false);
         foreach(Weapon weapon in weapons) 
         {
-            weapon.InitializeGunStats();
+            Debug.Log(weapon.gameObject);
+            GameObject instantiatedWeapon = Instantiate(weapon.gameObject, spawnGunPosition);
+            instantiatedWeapon.GetComponent<Weapon>().InitializeGunStats();
+            instantiatedWeapons.Add(instantiatedWeapon);
+            instantiatedWeapon.SetActive(false);
+            instantiatedWeapon.transform.rotation *= Quaternion.Euler(0, -90, 0);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         float debugRayDistance = 100f;
@@ -65,6 +72,8 @@ public class ThirdPersonShooterController: MonoBehaviour
 
         if(currentWeapon != null)
         {
+            
+
             if (starterAssetsInputs.aim)
             {
                 currentWeapon.AimDownSights();
@@ -93,17 +102,17 @@ public class ThirdPersonShooterController: MonoBehaviour
         //will definitely refactor lol
         if(starterAssetsInputs.equipWeapon1)
         {
-            EquipWeapon(weapons[0]);
+            EquipWeapon(instantiatedWeapons[0].GetComponent<Weapon>());
             starterAssetsInputs.equipWeapon1 = false;
         }
         if(starterAssetsInputs.equipWeapon2)
         {
-            EquipWeapon(weapons[1]);
+            EquipWeapon(instantiatedWeapons[1].GetComponent<Weapon>());
             starterAssetsInputs.equipWeapon2 = false;
         }
         if(starterAssetsInputs.equipWeapon3)
         {
-            EquipWeapon(weapons[2]);
+            EquipWeapon(instantiatedWeapons[2].GetComponent<Weapon>());
             starterAssetsInputs.equipWeapon3 = false;
         }
 
@@ -121,11 +130,11 @@ public class ThirdPersonShooterController: MonoBehaviour
         //Debug.Log(weapon.GetWeaponName());
         if (currentWeapon != null)
         {
-            currentWeapon.Unequip(spawnGunPosition);
+            currentWeapon.Unequip();
         }
         currentWeapon = weapon;
         currentWeapon.InitializeCamera(aimVirtualCamera, normalVirtualCamera);
-        currentWeapon.Equip(spawnGunPosition);
+        currentWeapon.Equip();
 
     }
 }

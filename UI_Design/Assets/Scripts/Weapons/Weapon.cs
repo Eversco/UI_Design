@@ -12,32 +12,37 @@ public class Weapon : MonoBehaviour
     private GameObject spawnedWeapon;
     private CinemachineVirtualCamera aimVirtualCamera;
     private CinemachineVirtualCamera normalVirtualCamera;
-    private int ammo;
-    private float shootCooldown;
-    private int num = 0;
+    private Weapon instantiatedWeapon;
+    public int ammo;
+    public float shootCooldown;
 
-    void Update()
+    private void Update()
     {
-        
-        
+        shootCooldown -= Time.deltaTime;
+        if (shootCooldown < 0f) { shootCooldown = 0f; }
     }
     public virtual void Shoot(Vector3 mouseWorldPosition, Transform spawnGunPosition, Transform pfBulletProjectile)
     {
         ammo -= 1;
         shootCooldown = 1f / weaponData.firerate;
 
-        Debug.Log(shootCooldown); 
+        
         // Implement shooting logic based on data properties
-        Vector3 actualMuzzlePosition = spawnedWeapon.transform.position + spawnedWeapon.transform.rotation * muzzlePosition.position;
-        Vector3 aimDir = (mouseWorldPosition - actualMuzzlePosition).normalized;
+        //Vector3 actualMuzzlePosition = transform.position + transform.rotation * muzzlePosition.position;
+        Vector3 aimDir = (mouseWorldPosition - muzzlePosition.position).normalized;
         
 
-        Instantiate(pfBulletProjectile, actualMuzzlePosition, Quaternion.LookRotation(aimDir, Vector3.up));
+        Instantiate(pfBulletProjectile, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
         
+    }
+
+    public float GetShootCooldown()
+    {
+        return shootCooldown;
     }
     public bool CanShoot()
     {
-        return ammo > 0;
+        return ammo > 0 && shootCooldown <= 0f;
     }
 
     public void AimDownSights()
@@ -55,21 +60,22 @@ public class Weapon : MonoBehaviour
         return weaponData.name;
     }
 
-    public void Unequip(Transform parent)
+    public void Unequip()
     {
-        Destroy(spawnedWeapon);
+        gameObject.SetActive(false);
+        //Destroy(spawnedWeapon);
     }
 
-    public void Equip(Transform parent)
+    public void Equip()
     {
+        gameObject.SetActive(true);
+        /*
         spawnedWeapon = Instantiate(gameObject, parent);
-        
+        instantiatedWeapon = spawnedWeapon.GetComponent<Weapon>();
         //spawnedWeapon.transform.rotation = Quaternion.Euler(0, parent.rotation.eulerAngles.y -90, -parent.rotation.eulerAngles.x);
         spawnedWeapon.transform.rotation *= Quaternion.Euler(0, -90, 0);
         Debug.Log(spawnedWeapon);
-        
-        
-
+        */
     }
 
     public float GetZoom()
