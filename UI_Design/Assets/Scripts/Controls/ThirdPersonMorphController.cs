@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
+using System.Linq;
 using Unity.VisualScripting;
 
 public class ThirdPersonMorphController : MonoBehaviour
@@ -54,8 +55,20 @@ public class ThirdPersonMorphController : MonoBehaviour
                     }
                     playerMeshRenderer.enabled = false;
                     currentMorphObject = Instantiate(targetObject);
+                    //Necessary modifications to the object for things to properly work
+                    
+                    HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
+                    if(existingHealthSystem != null)
+                    {
+                        Destroy(existingHealthSystem);
+                    }
+
+
+                    currentMorphObject.AddComponent<PlayerMorphed>();
+                    currentMorphObject.AddComponent<DamageParent>();
+
                     currentMorphObject.transform.parent = transform;
-                    if(currentMorphObject.TryGetComponent(out BoxCollider boxCollider))
+                    if(currentMorphObject.TryGetComponent(out Collider boxCollider))
                     {
                         boxCollider.isTrigger = true;
                     }

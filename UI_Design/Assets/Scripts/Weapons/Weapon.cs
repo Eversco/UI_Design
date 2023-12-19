@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -11,6 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform muzzlePosition;
 
     private GameObject spawnedWeapon;
+    private GameObject weaponWielder;
     private CinemachineVirtualCamera aimVirtualCamera;
     private CinemachineVirtualCamera normalVirtualCamera;
     private Weapon instantiatedWeapon;
@@ -50,8 +52,26 @@ public class Weapon : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit rayCastHit, rayDistance, targetLayer))
             {
                 Instantiate(weaponData.vfxHit, rayCastHit.point, Quaternion.identity);
-                Debug.Log("Hit " + rayCastHit.ToString() + "; Hit at" + rayCastHit.point.ToString());
-                
+                Debug.Log("Hit " + rayCastHit.transform.gameObject.ToString() + "; Hit at" + rayCastHit.point.ToString());
+
+                if(rayCastHit.transform.TryGetComponent(out IDamagable target))
+                {
+                    target.Damage(weaponData.damage);
+                }
+                if (rayCastHit.transform.GetComponent<PlayerMorphed>() == null && rayCastHit.transform.GetComponent<MorphTarget>() != null)
+                {
+                    //player hit a morphable target that is not a player, PUNISH THEM.
+                    IDamagable weaponWielderDamagable = weaponWielder.GetComponent<IDamagable>();
+                    if (weaponWielderDamagable != null)
+                    {
+                        weaponWielderDamagable.Damage(weaponData.damage * weaponData.penaltyMultiplier);
+                    }
+                    else
+                    {
+                        Debug.LogWarning(weaponWielder.ToString() + "does not have a healthsystem with" + weaponWielderDamagable.GetType().Name + "implemented!");
+                    }
+                }
+
             }
             Transform bullet = Instantiate(pfBulletProjectile, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(new Vector3(x, y, 0)));
 
@@ -115,11 +135,13 @@ public class Weapon : MonoBehaviour
         //Debug.Log(normalVirtualCamera.m_Lens.FieldOfView / GetZoom());
         aimVirtualCamera.m_Lens.FieldOfView = normalVirtualCamera.m_Lens.FieldOfView / GetZoom();
     }
+    
 
-    public void InitializeGunStats()
+    public void InitializeGunStats(GameObject weaponWielder) //added parameter wielding to seeker itself because of the need to damage self from here
     {
         ammo = weaponData.clipSize;
         shootCooldown = 0f;
+        this.weaponWielder = weaponWielder;
     }
     // Implement other IWeapon interface methods based on data properties
 }

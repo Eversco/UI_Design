@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - DefaultPlayerVisual
+  - PlayerTag
   layers:
   - Default
   - TransparentFX

@@ -36,7 +36,7 @@ public class ThirdPersonShooterController: MonoBehaviour
         {
             Debug.Log(weapon.gameObject);
             GameObject instantiatedWeapon = Instantiate(weapon.gameObject, spawnGunPosition);
-            instantiatedWeapon.GetComponent<Weapon>().InitializeGunStats();
+            instantiatedWeapon.GetComponent<Weapon>().InitializeGunStats(gameObject);
             instantiatedWeapons.Add(instantiatedWeapon);
             instantiatedWeapon.SetActive(false);
             instantiatedWeapon.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
