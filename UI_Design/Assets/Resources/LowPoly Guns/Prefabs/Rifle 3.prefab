@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5962309044822735285}
   - component: {fileID: -3569353815409751570}
   - component: {fileID: 5617895005348352729}
+  - component: {fileID: 12265773181917259}
   m_Layer: 0
   m_Name: Rifle 3
   m_TagString: Untagged
@@ -122,6 +123,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 4c40af77dcc72ac4da9014c2aab32b51, type: 2}
   muzzlePosition: {fileID: 2279382383834198671}
+  ammo: 0
+  shootCooldown: 0
+--- !u!95 &12265773181917259
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313856188506331232}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db1203df7d39db4eb9127aa9eeb6063, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7713563967564927600
 GameObject:
   m_ObjectHideFlags: 0

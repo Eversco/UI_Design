@@ -4,19 +4,26 @@ using System.Collections.Generic;
 using System.IO.Pipes;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Weapon : MonoBehaviour
 {
-    [SerializeField]private WeaponSO weaponData;
-    [SerializeField]private Transform muzzlePosition;
-
+    [SerializeField] private WeaponSO weaponData;
+    [SerializeField] private Transform muzzlePosition;
 
     private GameObject spawnedWeapon;
     private CinemachineVirtualCamera aimVirtualCamera;
     private CinemachineVirtualCamera normalVirtualCamera;
     private Weapon instantiatedWeapon;
+    private Animator weaponAnimator;
     public int ammo;
     public float shootCooldown;
 
+    private const string SHOOT = "Shoot";
+
+    private void Awake()
+    {
+        weaponAnimator = GetComponent<Animator>();
+    }
     private void Update()
     {
         shootCooldown -= Time.deltaTime;
@@ -27,7 +34,7 @@ public class Weapon : MonoBehaviour
         ammo -= 1;
         shootCooldown = 1f / weaponData.firerate;
 
-        
+        weaponAnimator.SetTrigger(SHOOT);
         // Implement shooting logic based on data properties
         //Vector3 actualMuzzlePosition = transform.position + transform.rotation * muzzlePosition.position;
         Vector3 aimDir = (mouseWorldPosition - muzzlePosition.position).normalized;
