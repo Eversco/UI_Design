@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ButtonClickScript : MonoBehaviour
 {
-    public void StartGame()
+
+    public void StartGameAsHost()
+    {
+
+        SceneManager.LoadScene(1);
+
+    }
+    public void StartGameAClient()
     {
         SceneManager.LoadScene(1);
     }
@@ -15,13 +22,4 @@ public class ButtonClickScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void Setting()
-    {
-
-    }
-
-    public void Help()
-    {
-
-    }
 }
