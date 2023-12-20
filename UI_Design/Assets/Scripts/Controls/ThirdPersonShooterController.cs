@@ -106,7 +106,7 @@ public class ThirdPersonShooterController: MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Current weapon is already reloading!");
+                    Debug.Log("Current weapon is already reloading or clip full!");
                 }
             }
         }

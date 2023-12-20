@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RPG
   m_EditorClassIdentifier: 
   gunModel: {fileID: 660537340789195362, guid: 67a7e24bd17106e44b96414cadeb93f0, type: 3}
+  vfxHit: {fileID: 0}
   equipAnim: {fileID: 0}
   fireAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
@@ -21,6 +22,7 @@ MonoBehaviour:
   firerate: 1
   zoomMultiplier: 1.2
   clipSize: 1
+  reloadTime: 6
   pelletCount: 1
   inaccuracy: 0.5
   penaltyMultiplier: 0.2

@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
     }
     public bool CanReload()
     {
-        return !isReloading;
+        return !isReloading && ammo < weaponData.clipSize;
     }
 
     public void AimDownSights()

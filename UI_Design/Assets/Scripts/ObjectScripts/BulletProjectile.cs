@@ -49,7 +49,7 @@ public class BulletProjectile : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Hit " + other.gameObject.ToString() + "; Hit at" + transform.position.ToString());
+        //Debug.Log("Hit " + other.gameObject.ToString() + "; Hit at" + transform.position.ToString());
         //Transform hitVfx = Instantiate(vfxHit, transform.position, Quaternion.identity);
         //hitVfx.localScale = new Vector3(2,2,2);
         Destroy(gameObject);
