@@ -14,6 +14,7 @@ public class WeaponSO : ScriptableObject
     public float firerate;
     public float zoomMultiplier;
     public int clipSize;
+    public float reloadTime;
     [Tooltip("How many bullet instances fires at once, useful for shotguns")]
     public int pelletCount;
     [Tooltip("Random spread for each bullet fired in degrees")]

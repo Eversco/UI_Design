@@ -86,13 +86,28 @@ public class ThirdPersonShooterController: MonoBehaviour
                 thirdPersonController.SetSensitivity(normalSensitivity);
             }
 
-            if (starterAssetsInputs.shoot && currentWeapon.CanShoot())
+            if (starterAssetsInputs.shoot)
             {
-                
-                currentWeapon.Shoot(mouseWorldPosition, pfBulletProjectile, debugRayDistance, aimColliderLayerMask);
-                //Debug.Log(spawnGunPosition.position);
-                //Works as a semi auto gun. Have to repress mb1 to shoot again
                 starterAssetsInputs.shoot = false;
+                if(currentWeapon.CanShoot())
+                {
+                    currentWeapon.Shoot(mouseWorldPosition, pfBulletProjectile, debugRayDistance, aimColliderLayerMask);
+                    //Debug.Log(spawnGunPosition.position);
+                    //Works as a semi auto gun. Have to repress mb1 to shoot again
+                }
+            }
+
+            if(starterAssetsInputs.reload)
+            {
+                starterAssetsInputs.reload = false;
+                if (currentWeapon.CanReload())
+                {
+                    currentWeapon.Reload();
+                }
+                else
+                {
+                    Debug.Log("Current weapon is already reloading!");
+                }
             }
         }
         

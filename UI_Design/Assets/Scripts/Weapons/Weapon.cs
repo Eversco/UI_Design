@@ -10,6 +10,10 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponSO weaponData;
     [SerializeField] private Transform muzzlePosition;
+    [SerializeField] private int ammo;
+    [SerializeField] private float shootCooldown;
+    [SerializeField] private float reloadCooldown;
+    [SerializeField] private bool isReloading;
 
     private GameObject spawnedWeapon;
     private GameObject weaponWielder;
@@ -17,8 +21,7 @@ public class Weapon : MonoBehaviour
     private CinemachineVirtualCamera normalVirtualCamera;
     private Weapon instantiatedWeapon;
     private Animator weaponAnimator;
-    public int ammo;
-    public float shootCooldown;
+    
 
     private const string SHOOT = "Shoot";
 
@@ -29,7 +32,16 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         shootCooldown -= Time.deltaTime;
+        reloadCooldown -= Time.deltaTime;
         if (shootCooldown < 0f) { shootCooldown = 0f; }
+        if (reloadCooldown < 0f) 
+        { 
+            reloadCooldown = 0f;
+            if(isReloading)
+            {
+                RefillAmmo();
+            }
+        }
     }
     public virtual void Shoot(Vector3 mouseWorldPosition, Transform pfBulletProjectile, float rayDistance, LayerMask targetLayer)
     {
@@ -87,7 +99,11 @@ public class Weapon : MonoBehaviour
     }
     public bool CanShoot()
     {
-        return ammo > 0 && shootCooldown <= 0f;
+        return ammo > 0 && shootCooldown <= 0f && reloadCooldown <= 0f;
+    }
+    public bool CanReload()
+    {
+        return !isReloading;
     }
 
     public void AimDownSights()
@@ -99,7 +115,16 @@ public class Weapon : MonoBehaviour
     {
         aimVirtualCamera.gameObject.SetActive(false);
     }
-
+    public void Reload()
+    {
+        reloadCooldown = weaponData.reloadTime;
+        isReloading = true;
+    }
+    public void RefillAmmo()
+    {
+        isReloading = false;
+        ammo = weaponData.clipSize;
+    }
     public string GetWeaponName()
     {
         return weaponData.name;
@@ -107,6 +132,8 @@ public class Weapon : MonoBehaviour
 
     public void Unequip()
     {
+        isReloading = false;
+        reloadCooldown = 0f;
         gameObject.SetActive(false);
         //Destroy(spawnedWeapon);
     }
@@ -141,6 +168,8 @@ public class Weapon : MonoBehaviour
     {
         ammo = weaponData.clipSize;
         shootCooldown = 0f;
+        reloadCooldown = 0f;
+        isReloading = false;
         this.weaponWielder = weaponWielder;
     }
     // Implement other IWeapon interface methods based on data properties
