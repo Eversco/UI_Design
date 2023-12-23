@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
-using UnityEditor.ShaderGraph.Internal;
+
 
 public class ThirdPersonShooterController: MonoBehaviour
 {

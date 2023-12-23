@@ -5,6 +5,8 @@ using Cinemachine;
 using StarterAssets;
 using System.Linq;
 using Unity.VisualScripting;
+using Unity.Netcode;
+using UnityEngine.UIElements;
 
 public class ThirdPersonMorphController : MonoBehaviour
 {
@@ -20,6 +22,15 @@ public class ThirdPersonMorphController : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private GameObject currentMorphObject;
+
+    #region Network Variables
+    [SerializeField]
+    public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
+
+    [SerializeField]
+    public NetworkVariable<Vector3> networkRotation = new NetworkVariable<Vector3>();
+    #endregion
+
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +111,13 @@ public class ThirdPersonMorphController : MonoBehaviour
         if(currentMorphObject != null)
         {
             currentMorphObject.transform.position = transform.position;
+        }
+
+        [ServerRpc]
+        void UpdateClientPosition(ServerRpcParams rpcParams = default)
+        {
+            networkPosition.Value = transform.position;
+            networkRotation.Value = transform.forward;
         }
     }
 }
