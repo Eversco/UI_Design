@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SimplePoly City - Low Poly Assets_Demo Scene.unity
     guid: 7e6d3f4e5d896154ab4438845532ac3e
+  - enabled: 0
+    path: Assets/Scenes/NetTesting.unity
+    guid: ccf12ed49c5c00f4e932d5532ac312f1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

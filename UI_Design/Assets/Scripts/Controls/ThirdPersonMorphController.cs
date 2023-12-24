@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using Unity.Netcode;
 using UnityEngine.UIElements;
 
-public class ThirdPersonMorphController : MonoBehaviour
+public class ThirdPersonMorphController : NetworkBehaviour
 {
 
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
@@ -23,21 +23,26 @@ public class ThirdPersonMorphController : MonoBehaviour
     private StarterAssetsInputs starterAssetsInputs;
     private GameObject currentMorphObject;
 
-    #region Network Variables
-    [SerializeField]
-    public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
 
-    [SerializeField]
-    public NetworkVariable<Vector3> networkRotation = new NetworkVariable<Vector3>();
-    #endregion
+    private void Awake()
+    {
+        if (aimVirtualCamera == null)
+        {
+            aimVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        }
+    }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
-        
+
         //disable controller move rotation for now(rotation caused by player movement)
         thirdPersonController.SetRotateOnMove(false);
     }
@@ -49,11 +54,11 @@ public class ThirdPersonMorphController : MonoBehaviour
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         float debugRayDistance = 100f;
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-        if(Physics.Raycast(ray, out RaycastHit rayCastHit, debugRayDistance, aimColliderLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit rayCastHit, debugRayDistance, aimColliderLayerMask))
         {
             debugTransform.position = rayCastHit.point;
             mouseWorldPosition = rayCastHit.point;
-            
+
             if (starterAssetsInputs.morph)
             {
                 GameObject targetObject = rayCastHit.transform.gameObject;
@@ -64,12 +69,14 @@ public class ThirdPersonMorphController : MonoBehaviour
                     {
                         Destroy(currentMorphObject);
                     }
-                    playerMeshRenderer.enabled = false;
+                    // This needs to be a rpc
+                    MorphIntoTargetServerRpc();
                     currentMorphObject = Instantiate(targetObject);
-                    //Necessary modifications to the object for things to properly work
                     
+                    //Necessary modifications to the object for things to properly work
+
                     HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
-                    if(existingHealthSystem != null)
+                    if (existingHealthSystem != null)
                     {
                         Destroy(existingHealthSystem);
                     }
@@ -77,9 +84,9 @@ public class ThirdPersonMorphController : MonoBehaviour
 
                     currentMorphObject.AddComponent<PlayerMorphed>();
                     currentMorphObject.AddComponent<DamageParent>();
-
+                    currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
                     currentMorphObject.transform.parent = transform;
-                    if(currentMorphObject.TryGetComponent(out Collider boxCollider))
+                    if (currentMorphObject.TryGetComponent(out Collider boxCollider))
                     {
                         boxCollider.isTrigger = true;
                     }
@@ -108,16 +115,14 @@ public class ThirdPersonMorphController : MonoBehaviour
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 5f);
 
         //debug
-        if(currentMorphObject != null)
+        if (currentMorphObject != null)
         {
             currentMorphObject.transform.position = transform.position;
         }
-
-        [ServerRpc]
-        void UpdateClientPosition(ServerRpcParams rpcParams = default)
-        {
-            networkPosition.Value = transform.position;
-            networkRotation.Value = transform.forward;
-        }
     }
+        [ServerRpc]
+        void MorphIntoTargetServerRpc(ServerRpcParams rpcParams = default)
+        {
+            playerMeshRenderer.enabled = false;
+        }
 }
