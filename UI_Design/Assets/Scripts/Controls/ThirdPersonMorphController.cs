@@ -26,14 +26,17 @@ public class ThirdPersonMorphController : NetworkBehaviour
 
     private void Awake()
     {
+        /*
         if (aimVirtualCamera == null)
         {
             aimVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         }
+        */
     }
 
     public override void OnNetworkSpawn()
     {
+        aimVirtualCamera.gameObject.SetActive(IsOwner);
         base.OnNetworkSpawn();
     }
 
