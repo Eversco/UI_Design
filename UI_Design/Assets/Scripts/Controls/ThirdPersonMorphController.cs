@@ -61,6 +61,7 @@ public class ThirdPersonMorphController : NetworkBehaviour
 
             if (starterAssetsInputs.morph)
             {
+                starterAssetsInputs.morph = false;
                 GameObject targetObject = rayCastHit.transform.gameObject;
                 if (targetObject.GetComponent<MorphTarget>() != null)
                 {
@@ -72,7 +73,15 @@ public class ThirdPersonMorphController : NetworkBehaviour
                     // This needs to be a rpc
                     MorphIntoTargetServerRpc();
                     currentMorphObject = Instantiate(targetObject);
-                    
+                    //netcode spawning
+                    if (currentMorphObject.GetComponent<NetworkObject>() != null)
+                    {
+                        currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Target object does not have networkobject component!");
+                    }
                     //Necessary modifications to the object for things to properly work
 
                     HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
@@ -80,24 +89,24 @@ public class ThirdPersonMorphController : NetworkBehaviour
                     {
                         Destroy(existingHealthSystem);
                     }
-
-
+                    if(currentMorphObject.GetComponent<MorphTarget>() != null)
+                    {
+                        Destroy(currentMorphObject.GetComponent<MorphTarget>());
+                    }
                     currentMorphObject.AddComponent<PlayerMorphed>();
                     currentMorphObject.AddComponent<DamageParent>();
-                    currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
                     currentMorphObject.transform.parent = transform;
-                    if (currentMorphObject.TryGetComponent(out Collider boxCollider))
+                    if (currentMorphObject.TryGetComponent(out Collider collider))
                     {
-                        boxCollider.isTrigger = true;
+                        collider.isTrigger = true;
                     }
-                    
                 }
                 else
                 {
                     Debug.Log("Not morphable");
                 }
                 Debug.Log(rayCastHit.transform.gameObject.ToString() + " " + Vector3.Distance(rayCastHit.point, playerCameraRoot.position).ToString());
-                starterAssetsInputs.morph = false;
+                
             }
         }
         else
