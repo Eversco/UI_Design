@@ -71,45 +71,20 @@ public class ThirdPersonMorphController : NetworkBehaviour
                     Debug.Log("Morphable");
                     if (currentMorphObject != null)
                     {
+                        // Needs to despawn on the network
                         Destroy(currentMorphObject);
                     }
                     // This needs to be a rpc
-                    MorphIntoTargetServerRpc();
-                    currentMorphObject = Instantiate(targetObject);
-                    //netcode spawning
-                    if (currentMorphObject.GetComponent<NetworkObject>() != null)
-                    {
-                        currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Target object does not have networkobject component!");
-                    }
-                    //Necessary modifications to the object for things to properly work
+                    MorphIntoTargetServerRpc(targetObject);
 
-                    HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
-                    if (existingHealthSystem != null)
-                    {
-                        Destroy(existingHealthSystem);
-                    }
-                    if(currentMorphObject.GetComponent<MorphTarget>() != null)
-                    {
-                        Destroy(currentMorphObject.GetComponent<MorphTarget>());
-                    }
-                    currentMorphObject.AddComponent<PlayerMorphed>();
-                    currentMorphObject.AddComponent<DamageParent>();
-                    currentMorphObject.transform.parent = transform;
-                    if (currentMorphObject.TryGetComponent(out Collider collider))
-                    {
-                        collider.isTrigger = true;
-                    }
+
                 }
                 else
                 {
                     Debug.Log("Not morphable");
                 }
                 Debug.Log(rayCastHit.transform.gameObject.ToString() + " " + Vector3.Distance(rayCastHit.point, playerCameraRoot.position).ToString());
-                
+
             }
         }
         else
@@ -132,9 +107,40 @@ public class ThirdPersonMorphController : NetworkBehaviour
             currentMorphObject.transform.position = transform.position;
         }
     }
-        [ServerRpc]
-        void MorphIntoTargetServerRpc(ServerRpcParams rpcParams = default)
+    [ServerRpc]
+    void MorphIntoTargetServerRpc(NetworkObjectReference targetObject, ServerRpcParams rpcParams = default)
+    {
+        
+        if (!targetObject.TryGet(out NetworkObject networkObject))
         {
-            playerMeshRenderer.enabled = false;
+            Debug.Log("error");
         }
+        currentMorphObject = Instantiate(networkObject.gameObject);
+        //Necessary modifications to the object for things to properly work
+
+        HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
+        if (existingHealthSystem != null)
+        {
+            Destroy(existingHealthSystem);
+        }
+        if (currentMorphObject.GetComponent<MorphTarget>() != null)
+        {
+            Destroy(currentMorphObject.GetComponent<MorphTarget>());
+        }
+        currentMorphObject.AddComponent<PlayerMorphed>();
+        currentMorphObject.AddComponent<DamageParent>();
+        currentMorphObject.transform.parent = transform;
+        if (currentMorphObject.TryGetComponent(out Collider collider))
+        {
+            collider.isTrigger = true;
+        }
+        currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+        MorphIntoTargetClientRpc();
+    }
+
+
+    [ClientRpc]
+    void MorphIntoTargetClientRpc() {
+        playerMeshRenderer.enabled = false;
+    }
 }
