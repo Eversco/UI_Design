@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 375862640
+  GlobalObjectIdHash: 624232881
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1497,6 +1497,7 @@ MonoBehaviour:
   debugTransform: {fileID: 2694335110560755372, guid: 1eecfeafa0fee6c45acdcdbc230d8909, type: 3}
   playerCameraRoot: {fileID: 7949665625728033723}
   playerMeshRenderer: {fileID: 7845830973126722499}
+  morphablePrefabs: {fileID: 11400000, guid: 3026f6de346f78048bb696d4c0fc41df, type: 2}
 --- !u!114 &2215966547470786252
 MonoBehaviour:
   m_ObjectHideFlags: 0

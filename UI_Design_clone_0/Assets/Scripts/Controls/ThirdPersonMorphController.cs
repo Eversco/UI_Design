@@ -7,6 +7,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using Unity.Netcode;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 public class ThirdPersonMorphController : NetworkBehaviour
 {
@@ -19,10 +20,13 @@ public class ThirdPersonMorphController : NetworkBehaviour
     [SerializeField] private Transform playerCameraRoot;
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
+
+    public NetworkPrefabsList morphablePrefabs;
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private GameObject currentMorphObject;
 
+    private NetworkVariable<bool> isMorphed = new NetworkVariable<bool>(false); 
 
     private void Awake()
     {
@@ -36,6 +40,9 @@ public class ThirdPersonMorphController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (isMorphed.Value) {
+            playerMeshRenderer.enabled = false;
+        }
         aimVirtualCamera.gameObject.SetActive(IsOwner);
         base.OnNetworkSpawn();
     }
@@ -68,14 +75,23 @@ public class ThirdPersonMorphController : NetworkBehaviour
                 GameObject targetObject = rayCastHit.transform.gameObject;
                 if (targetObject.GetComponent<MorphTarget>() != null)
                 {
-                    Debug.Log("Morphable");
-                    if (currentMorphObject != null)
+                    if (isMorphed.Value)
                     {
-                        // Needs to despawn on the network
-                        Destroy(currentMorphObject);
+                        currentMorphObject.GetComponent<NetworkObject>().Despawn();
+                        isMorphed.Value = false;
+                        playerMeshRenderer.enabled = true;
                     }
+                    foreach (NetworkPrefab prefab in morphablePrefabs.PrefabList)
+                    {
+                        if (targetObject.name.Contains(prefab.Prefab.name)) {
+                            MorphIntoTargetServerRpc(prefab.Prefab.name);
+                            isMorphed.Value = true;
+                            break;
+                        }
+                    }
+                    
                     // This needs to be a rpc
-                    MorphIntoTargetServerRpc(targetObject);
+                    
 
 
                 }
@@ -108,39 +124,32 @@ public class ThirdPersonMorphController : NetworkBehaviour
         }
     }
     [ServerRpc]
-    void MorphIntoTargetServerRpc(NetworkObjectReference targetObject, ServerRpcParams rpcParams = default)
+    void MorphIntoTargetServerRpc(string prefabName, ServerRpcParams rpcParams = default)
     {
-        
-        if (!targetObject.TryGet(out NetworkObject networkObject))
-        {
-            Debug.Log("error");
-        }
-        currentMorphObject = Instantiate(networkObject.gameObject);
-        //Necessary modifications to the object for things to properly work
 
-        HealthSystem existingHealthSystem = currentMorphObject.GetComponent<HealthSystem>();
-        if (existingHealthSystem != null)
+        playerMeshRenderer.enabled = false;
+
+        foreach (NetworkPrefab prefab in morphablePrefabs.PrefabList)
         {
-            Destroy(existingHealthSystem);
+            if (prefab.Prefab.name.Contains(prefabName)) {
+                currentMorphObject = Instantiate(prefab.Prefab);
+            }
         }
-        if (currentMorphObject.GetComponent<MorphTarget>() != null)
-        {
-            Destroy(currentMorphObject.GetComponent<MorphTarget>());
-        }
-        currentMorphObject.AddComponent<PlayerMorphed>();
-        currentMorphObject.AddComponent<DamageParent>();
-        currentMorphObject.transform.parent = transform;
+        
+        //Necessary modifications to the object for things to properly work
+        
+        
         if (currentMorphObject.TryGetComponent(out Collider collider))
         {
             collider.isTrigger = true;
         }
-        currentMorphObject.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+        currentMorphObject.GetComponent<NetworkObject>().Spawn();
+        currentMorphObject.transform.parent = transform;
         MorphIntoTargetClientRpc();
     }
 
-
     [ClientRpc]
-    void MorphIntoTargetClientRpc() {
+    void MorphIntoTargetClientRpc()  {
         playerMeshRenderer.enabled = false;
     }
 }

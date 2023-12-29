@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1082087761815089827}
   - component: {fileID: 2945545883520452201}
   - component: {fileID: 192203348882340279}
-  - component: {fileID: 5561967259695125457}
   - component: {fileID: -3361468651317363652}
+  - component: {fileID: 5561967259695125457}
   - component: {fileID: 453629253434943751}
   m_Layer: 0
   m_Name: Hydrant
@@ -109,18 +109,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7208596612370148468, guid: 021c3a4f0bfbeed4d829ed40b0420a66, type: 3}
---- !u!114 &5561967259695125457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3738078055998318524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e6af9bc13cc78d47a00ecc62c8c00c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3361468651317363652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2822308252
+  GlobalObjectIdHash: 1661702151
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -141,6 +129,18 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5561967259695125457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738078055998318524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6af9bc13cc78d47a00ecc62c8c00c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &453629253434943751
 MonoBehaviour:
   m_ObjectHideFlags: 0
