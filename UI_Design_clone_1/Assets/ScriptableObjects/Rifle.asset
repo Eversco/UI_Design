@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef73fc3e2265f5c4daef4d8f17748bc6, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: 
+  gunModel: {fileID: 4824846826913792730, guid: 7444562fe5798e846a4045a93e123308, type: 3}
+  vfxHit: {fileID: 613433886817584985, guid: 6e845b0e80fad2d4c93ff505a0750129, type: 3}
+  equipAnim: {fileID: 0}
+  fireAnim: {fileID: 0}
+  reloadAnim: {fileID: 0}
+  weaponName: Rifle
+  damage: 16
+  firerate: 9
+  zoomMultiplier: 1.5
+  clipSize: 30
+  reloadTime: 3
+  pelletCount: 1
+  inaccuracy: 0.4
+  penaltyMultiplier: 0.25
+  fireType: 2

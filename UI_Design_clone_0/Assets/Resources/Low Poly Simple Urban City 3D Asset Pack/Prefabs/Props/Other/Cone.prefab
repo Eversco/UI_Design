@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3916547152898111775}
   - component: {fileID: 1278645897879604693}
   - component: {fileID: 4493443707096492325}
-  - component: {fileID: 4060183568506516052}
   - component: {fileID: 866981131309177095}
+  - component: {fileID: 4060183568506516052}
   - component: {fileID: 4074007144501605566}
   m_Layer: 0
   m_Name: Cone
@@ -109,18 +109,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3613567641014311022, guid: 292a1f2b7663bf44d92c6993be14e891, type: 3}
---- !u!114 &4060183568506516052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774150586620734464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e6af9bc13cc78d47a00ecc62c8c00c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &866981131309177095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1022607654
+  GlobalObjectIdHash: 1337480636
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -141,6 +129,18 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &4060183568506516052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774150586620734464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6af9bc13cc78d47a00ecc62c8c00c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4074007144501605566
 MonoBehaviour:
   m_ObjectHideFlags: 0
