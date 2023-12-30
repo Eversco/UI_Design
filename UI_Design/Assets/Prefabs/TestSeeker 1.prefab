@@ -1834,6 +1834,7 @@ MonoBehaviour:
   equipWeapon1: 0
   equipWeapon2: 0
   equipWeapon3: 0
+  reload: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
