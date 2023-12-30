@@ -24,5 +24,14 @@ public class HealthSystem : MonoBehaviour, IDamagable
     {
         currentHp -= damage;
         Debug.Log(gameObject.ToString() + "Took " + damage.ToString() + "damage; Remaining HP: " + currentHp.ToString());
+        if(currentHp <= 0)
+        {
+            Die();
+        }
+    }
+    protected virtual void Die()
+    {
+
+        Destroy(gameObject);
     }
 }

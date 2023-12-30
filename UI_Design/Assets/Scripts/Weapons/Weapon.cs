@@ -65,11 +65,13 @@ public class Weapon : MonoBehaviour
             {
                 Instantiate(weaponData.vfxHit, rayCastHit.point, Quaternion.identity);
                 Debug.Log("Hit " + rayCastHit.transform.gameObject.ToString() + "; Hit at" + rayCastHit.point.ToString());
+                HandleKnockback(rayCastHit, ray, weaponData.damage);
 
-                if(rayCastHit.transform.TryGetComponent(out IDamagable target))
+                if (rayCastHit.transform.TryGetComponent(out IDamagable target))
                 {
                     target.Damage(weaponData.damage);
                 }
+                /*
                 if (rayCastHit.transform.GetComponent<PlayerMorphed>() == null && rayCastHit.transform.GetComponent<MorphTarget>() != null)
                 {
                     //player hit a morphable target that is not a player, PUNISH THEM.
@@ -83,16 +85,24 @@ public class Weapon : MonoBehaviour
                         Debug.LogWarning(weaponWielder.ToString() + "does not have a healthsystem with" + weaponWielderDamagable.GetType().Name + "implemented!");
                     }
                 }
+                */
+               
 
             }
             Transform bullet = Instantiate(pfBulletProjectile, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(new Vector3(x, y, 0)));
+
 
             //bullet.localScale = new Vector3(0.7f, 0.7f, 1f);
         }
         
         
     }
-
+    public void HandleKnockback(RaycastHit rayCastHit, Ray ray, float damage)
+    {
+        Rigidbody body = rayCastHit.rigidbody;
+        if (body == null || body.isKinematic) { return; }
+        body.AddForce(damage * 1f * ray.direction, ForceMode.Impulse);
+    }
     public float GetShootCooldown()
     {
         return shootCooldown;

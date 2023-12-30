@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf3a269f6f987f44bd463d42b434461, type: 3}
+  m_Name: Hydrant
+  m_EditorClassIdentifier: 
+  vfxDie: {fileID: 613433886817584985, guid: 9f5fbcfb6299c2b4c912f3ff44f14463, type: 3}
+  maxHP: 200
+  mass: 2

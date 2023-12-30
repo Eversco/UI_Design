@@ -125,6 +125,8 @@ MonoBehaviour:
   muzzlePosition: {fileID: 976118514034365549}
   ammo: 6
   shootCooldown: 0
+  reloadCooldown: 0
+  isReloading: 0
 --- !u!95 &436335580739360511
 Animator:
   serializedVersion: 5
