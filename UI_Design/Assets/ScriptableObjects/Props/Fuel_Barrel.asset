@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxDie: {fileID: 613433886817584985, guid: 9f5fbcfb6299c2b4c912f3ff44f14463, type: 3}
   maxHP: 150
-  mass: 1.5
+  mass: 6
