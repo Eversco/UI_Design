@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     private CinemachineVirtualCamera normalVirtualCamera;
     private Weapon instantiatedWeapon;
     private Animator weaponAnimator;
-    
+    private int semiFireDebounce; 
 
     private const string SHOOT = "Shoot";
 
@@ -45,6 +45,12 @@ public class Weapon : MonoBehaviour
     }
     public virtual void Shoot(Vector3 mouseWorldPosition, Transform pfBulletProjectile, float rayDistance, LayerMask targetLayer)
     {
+        if(weaponData.fireType == FireType.Semi && semiFireDebounce <= 0)
+        {
+
+            return;
+        }
+        semiFireDebounce -= 1;
         ammo -= 1;
         shootCooldown = 1f / weaponData.firerate;
 
@@ -93,9 +99,11 @@ public class Weapon : MonoBehaviour
 
 
             //bullet.localScale = new Vector3(0.7f, 0.7f, 1f);
-        }
-        
-        
+        }   
+    }
+    public void StopShoot()
+    {
+        semiFireDebounce = 1;
     }
     public void HandleKnockback(RaycastHit rayCastHit, Ray ray, float damage)
     {
@@ -145,6 +153,7 @@ public class Weapon : MonoBehaviour
         isReloading = false;
         reloadCooldown = 0f;
         gameObject.SetActive(false);
+        semiFireDebounce = 1;
         //Destroy(spawnedWeapon);
     }
 
@@ -179,6 +188,7 @@ public class Weapon : MonoBehaviour
         ammo = weaponData.clipSize;
         shootCooldown = 0f;
         reloadCooldown = 0f;
+        semiFireDebounce = 1;
         isReloading = false;
         this.weaponWielder = weaponWielder;
     }

@@ -88,13 +88,16 @@ public class ThirdPersonShooterController: MonoBehaviour
 
             if (starterAssetsInputs.shoot)
             {
-                starterAssetsInputs.shoot = false;
                 if(currentWeapon.CanShoot())
                 {
                     currentWeapon.Shoot(mouseWorldPosition, pfBulletProjectile, debugRayDistance, aimColliderLayerMask);
                     //Debug.Log(spawnGunPosition.position);
                     //Works as a semi auto gun. Have to repress mb1 to shoot again
                 }
+            }
+            else
+            {
+                currentWeapon.StopShoot();
             }
 
             if(starterAssetsInputs.reload)
