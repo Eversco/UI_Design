@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedd0dbde5e63c648872d44e67a6a72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propData: {fileID: 11400000, guid: 7f405b2851ac67e419a85fbbba63fa7a, type: 2}
+  propData: {fileID: 11400000, guid: 5e97f12b1954f5048a35f79d6c1b3052, type: 2}
   currentHP: 0
 --- !u!64 &4345127446438992836
 MeshCollider:

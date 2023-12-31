@@ -24,6 +24,8 @@ public class ThirdPersonShooterController: MonoBehaviour
     public Weapon currentWeapon { get; private set; }
     private List<GameObject> instantiatedWeapons = new List<GameObject>();
 
+    [SerializeField] private PlayerStat stat;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +93,7 @@ public class ThirdPersonShooterController: MonoBehaviour
                 if(currentWeapon.CanShoot())
                 {
                     currentWeapon.Shoot(mouseWorldPosition, pfBulletProjectile, debugRayDistance, aimColliderLayerMask);
+                    stat.ReduceBullet();
                     //Debug.Log(spawnGunPosition.position);
                     //Works as a semi auto gun. Have to repress mb1 to shoot again
                 }
@@ -106,11 +109,18 @@ public class ThirdPersonShooterController: MonoBehaviour
                 if (currentWeapon.CanReload())
                 {
                     currentWeapon.Reload();
+                    stat.Reload(currentWeapon.GetClipSize());
                 }
                 else
                 {
                     Debug.Log("Current weapon is already reloading or clip full!");
+                    if (currentWeapon.IsReloading()) stat.Reloaded();
+                
                 }
+            }
+            if (currentWeapon != null && !currentWeapon.IsReloading())
+            {
+                stat.NotReloaded();
             }
         }
         
@@ -160,5 +170,6 @@ public class ThirdPersonShooterController: MonoBehaviour
         currentWeapon.InitializeCamera(aimVirtualCamera, normalVirtualCamera);
         currentWeapon.Equip();
 
+        stat.CheckGun(currentWeapon);
     }
 }
