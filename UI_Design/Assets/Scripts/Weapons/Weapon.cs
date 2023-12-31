@@ -13,22 +13,20 @@ public class Weapon : MonoBehaviour
     
     [SerializeField] protected float shootCooldown;
     [SerializeField] protected float reloadCooldown;
-    public bool isReloading { get; protected set; }
-    public int ammo { get; protected set; }
-
+    [SerializeField] protected int ammo;
+    [SerializeField] protected bool isReloading;
     protected GameObject weaponWielder;
     protected CinemachineVirtualCamera aimVirtualCamera;
     protected CinemachineVirtualCamera normalVirtualCamera;
     protected Animator weaponAnimator;
     protected int semiFireDebounce; 
-    public string weaponName { get; [SerializeField] private set; }
+    
 
     protected const string SHOOT = "Shoot";
 
     private void Awake()
     {
         weaponAnimator = GetComponent<Animator>();
-        weaponName = weaponData.name;
     }
     private void Update()
     {
@@ -139,10 +137,6 @@ public class Weapon : MonoBehaviour
         isReloading = false;
         ammo = weaponData.clipSize;
     }
-    public string GetWeaponName()
-    {
-        return weaponData.name;
-    }
 
     public void Unequip()
     {
@@ -169,7 +163,22 @@ public class Weapon : MonoBehaviour
     {
         return weaponData.zoomMultiplier;
     }
-
+    public int GetClipSize()
+    {
+        return weaponData.clipSize;
+    }
+    public int GetAmmo()
+    {
+        return ammo;
+    }
+    public string GetWeaponName()
+    {
+        return weaponData.name;
+    }
+    public bool IsReloading() 
+    {
+        return isReloading;
+    }
     public void InitializeCamera(CinemachineVirtualCamera aimVirtualCamera, CinemachineVirtualCamera normalVirtualCamera)
     {
         this.aimVirtualCamera = aimVirtualCamera;
