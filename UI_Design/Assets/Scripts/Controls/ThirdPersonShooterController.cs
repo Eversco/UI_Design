@@ -21,7 +21,7 @@ public class ThirdPersonShooterController: MonoBehaviour
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
-    private Weapon currentWeapon;
+    public Weapon currentWeapon { get; private set; }
     private List<GameObject> instantiatedWeapons = new List<GameObject>();
 
     // Start is called before the first frame update

@@ -10,22 +10,25 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] protected WeaponSO weaponData;
     [SerializeField] protected Transform muzzlePosition;
-    [SerializeField] protected int ammo;
+    
     [SerializeField] protected float shootCooldown;
     [SerializeField] protected float reloadCooldown;
-    [SerializeField] protected bool isReloading;
+    public bool isReloading { get; protected set; }
+    public int ammo { get; protected set; }
 
     protected GameObject weaponWielder;
     protected CinemachineVirtualCamera aimVirtualCamera;
     protected CinemachineVirtualCamera normalVirtualCamera;
     protected Animator weaponAnimator;
     protected int semiFireDebounce; 
+    public string weaponName { get; [SerializeField] private set; }
 
     protected const string SHOOT = "Shoot";
 
     private void Awake()
     {
         weaponAnimator = GetComponent<Animator>();
+        weaponName = weaponData.name;
     }
     private void Update()
     {
