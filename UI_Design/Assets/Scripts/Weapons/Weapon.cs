@@ -8,22 +8,20 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponSO weaponData;
-    [SerializeField] private Transform muzzlePosition;
-    [SerializeField] private int ammo;
-    [SerializeField] private float shootCooldown;
-    [SerializeField] private float reloadCooldown;
-    [SerializeField] private bool isReloading;
+    [SerializeField] protected WeaponSO weaponData;
+    [SerializeField] protected Transform muzzlePosition;
+    [SerializeField] protected int ammo;
+    [SerializeField] protected float shootCooldown;
+    [SerializeField] protected float reloadCooldown;
+    [SerializeField] protected bool isReloading;
 
-    private GameObject spawnedWeapon;
-    private GameObject weaponWielder;
-    private CinemachineVirtualCamera aimVirtualCamera;
-    private CinemachineVirtualCamera normalVirtualCamera;
-    private Weapon instantiatedWeapon;
-    private Animator weaponAnimator;
-    private int semiFireDebounce; 
+    protected GameObject weaponWielder;
+    protected CinemachineVirtualCamera aimVirtualCamera;
+    protected CinemachineVirtualCamera normalVirtualCamera;
+    protected Animator weaponAnimator;
+    protected int semiFireDebounce; 
 
-    private const string SHOOT = "Shoot";
+    protected const string SHOOT = "Shoot";
 
     private void Awake()
     {
@@ -45,11 +43,6 @@ public class Weapon : MonoBehaviour
     }
     public virtual void Shoot(Vector3 mouseWorldPosition, Transform pfBulletProjectile, float rayDistance, LayerMask targetLayer)
     {
-        if(weaponData.fireType == FireType.Semi && semiFireDebounce <= 0)
-        {
-
-            return;
-        }
         semiFireDebounce -= 1;
         ammo -= 1;
         shootCooldown = 1f / weaponData.firerate;
@@ -117,7 +110,7 @@ public class Weapon : MonoBehaviour
     }
     public bool CanShoot()
     {
-        return ammo > 0 && shootCooldown <= 0f && reloadCooldown <= 0f;
+        return ammo > 0 && shootCooldown <= 0f && reloadCooldown <= 0f && !(weaponData.fireType == FireType.Semi && semiFireDebounce <= 0);
     }
     public bool CanReload()
     {
@@ -138,7 +131,7 @@ public class Weapon : MonoBehaviour
         reloadCooldown = weaponData.reloadTime;
         isReloading = true;
     }
-    public void RefillAmmo()
+    public virtual void RefillAmmo()
     {
         isReloading = false;
         ammo = weaponData.clipSize;

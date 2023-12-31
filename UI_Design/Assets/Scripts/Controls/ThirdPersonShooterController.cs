@@ -134,6 +134,11 @@ public class ThirdPersonShooterController: MonoBehaviour
             EquipWeapon(instantiatedWeapons[2].GetComponent<Weapon>());
             starterAssetsInputs.equipWeapon3 = false;
         }
+        if(starterAssetsInputs.equipWeapon4)
+        {
+            EquipWeapon(instantiatedWeapons[3].GetComponent<Weapon>());
+            starterAssetsInputs.equipWeapon4 = false;
+        }
 
         
         

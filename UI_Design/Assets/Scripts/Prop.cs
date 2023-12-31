@@ -9,6 +9,7 @@ public class Prop : MonoBehaviour, IDamagable
     public void Damage(float damage)
     {
         currentHP -= damage;
+        Debug.Log(gameObject.ToString() + " took " + damage.ToString() + " damage");
         if(currentHP <= 0)
         {
             Die();
@@ -27,7 +28,8 @@ public class Prop : MonoBehaviour, IDamagable
         else 
         {
             rigidBody.mass = propData.mass;
-        }   
+        }
+        rigidBody.drag = 1;
     }
 
     // Update is called once per frame

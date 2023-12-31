@@ -6,6 +6,7 @@ public class WeaponSO : ScriptableObject
 {
     public Transform gunModel;
     public Transform vfxHit;
+    public Transform bullet;
     public Animation equipAnim;
     public Animation fireAnim;
     public Animation reloadAnim;

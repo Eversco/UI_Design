@@ -399,7 +399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7537802489372775373
 Transform:
   m_ObjectHideFlags: 0
@@ -1809,8 +1809,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
+    m_Bits: 1
+  canPush: 1
   strength: 1.1
 --- !u!114 &6773620646073215476
 MonoBehaviour:
@@ -1834,6 +1834,7 @@ MonoBehaviour:
   equipWeapon1: 0
   equipWeapon2: 0
   equipWeapon3: 0
+  equipWeapon4: 0
   reload: 0
   analogMovement: 0
   cursorLocked: 1
@@ -1963,6 +1964,7 @@ MonoBehaviour:
   - {fileID: -1278531813471572699, guid: 748d19574625db444877ca05561b6aea, type: 3}
   - {fileID: 5617895005348352729, guid: 7444562fe5798e846a4045a93e123308, type: 3}
   - {fileID: -7793784983020395614, guid: c9841888fa5041d499ada59f73087c6a, type: 3}
+  - {fileID: 5749463713221178985, guid: 67a7e24bd17106e44b96414cadeb93f0, type: 3}
 --- !u!1 &5529429972795308484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,7 +2111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2892018101441949616
 Transform:
   m_ObjectHideFlags: 0

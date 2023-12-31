@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BulletProjectile : MonoBehaviour
 {
-    [SerializeField] private LayerMask ignoreLayer = new LayerMask();
-    [SerializeField] private Transform vfxHit;
-    [SerializeField] private float maxTravelDistance = 500f;
-    [SerializeField] private float bulletSpeed = 30f;
+    [SerializeField] protected LayerMask ignoreLayer = new LayerMask();
+    [SerializeField] protected Transform vfxHit;
+    [SerializeField] protected float maxTravelDistance = 500f;
+    [SerializeField] protected float bulletSpeed = 30f;
 
-    private Rigidbody bulletRigidbody;
-    private float distanceTraveled;
+    protected Rigidbody bulletRigidbody;
+    protected float distanceTraveled;
     
 
     private void Awake()
@@ -18,11 +18,9 @@ public class BulletProjectile : MonoBehaviour
         bulletRigidbody = GetComponent<Rigidbody>();
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
         bulletRigidbody.velocity = transform.forward * bulletSpeed;
-        
         distanceTraveled = 0f;
     }
     private void Update()
@@ -34,7 +32,7 @@ public class BulletProjectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == ignoreLayer)
         {

@@ -18,6 +18,7 @@ namespace StarterAssets
 		public bool equipWeapon1;
 		public bool equipWeapon2;
 		public bool equipWeapon3;
+		public bool equipWeapon4;
 		public bool reload;
 
 		[Header("Movement Settings")]
@@ -75,7 +76,11 @@ namespace StarterAssets
         {
             EquipWeapon3Input(value.isPressed);
         }
-		public void OnReload(InputValue value) 
+        public void OnEquipWeapon4(InputValue value)
+        {
+            EquipWeapon4Input(value.isPressed);
+        }
+        public void OnReload(InputValue value) 
 		{
 			ReloadInput(value.isPressed);
 		}
@@ -127,8 +132,12 @@ namespace StarterAssets
         {
             equipWeapon3 = newEquipState;
         }
+        public void EquipWeapon4Input(bool newEquipState)
+        {
+            equipWeapon4 = newEquipState;
+        }
 
-		public void ReloadInput(bool newReloadState)
+        public void ReloadInput(bool newReloadState)
 		{
 			reload = newReloadState;
 		}

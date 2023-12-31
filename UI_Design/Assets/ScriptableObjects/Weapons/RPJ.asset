@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef73fc3e2265f5c4daef4d8f17748bc6, type: 3}
-  m_Name: RPG
+  m_Name: RPJ
   m_EditorClassIdentifier: 
   gunModel: {fileID: 660537340789195362, guid: 67a7e24bd17106e44b96414cadeb93f0, type: 3}
   vfxHit: {fileID: 0}
+  bullet: {fileID: 990642411595523552, guid: 7cc68cc07d6b32442ae6938a0d4df590, type: 3}
   equipAnim: {fileID: 0}
   fireAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
-  weaponName: RPG
+  weaponName: RPJ
   damage: 150
   firerate: 1
   zoomMultiplier: 1.2

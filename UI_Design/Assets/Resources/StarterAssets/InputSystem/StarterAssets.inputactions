@@ -87,6 +87,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Equip Weapon 4",
+                    "type": "Button",
+                    "id": "d23ad26d-2a96-44f5-9158-536da9cc4920",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "38b2b993-8ff7-414e-8983-b4e8e1d9e74e",
@@ -358,6 +367,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd76870e-2a81-4b87-b577-663abfa767d9",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Equip Weapon 4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
