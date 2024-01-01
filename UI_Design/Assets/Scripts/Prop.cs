@@ -6,8 +6,15 @@ public class Prop : MonoBehaviour, IDamagable
 {
     [SerializeField] private PropSO propData;
     [SerializeField] private float currentHP;
+    [SerializeField] private Canvas canvas;
     public void Damage(float damage)
     {
+        if (gameObject.name.Contains("Clone"))
+        {
+            win();
+            Die();
+            return;
+        }
         currentHP -= damage;
         Debug.Log(gameObject.ToString() + " took " + damage.ToString() + " damage");
         if(currentHP <= 0)
@@ -38,5 +45,10 @@ public class Prop : MonoBehaviour, IDamagable
         Debug.Log(gameObject.ToString() + " died a horrible death");
         Instantiate(propData.vfxDie, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+    protected void win()
+    {
+        Debug.Log("win!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        
     }
 }
