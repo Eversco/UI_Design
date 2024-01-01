@@ -11,10 +11,19 @@ public class PlayerHUD : MonoBehaviour
 
     [SerializeField] public TMP_Text reloader;
 
+    [SerializeField] public Image hpBar;
+
     public void UpdateBullets(int currentBullet, int maxBullet)
     {
         currentBulletText.text = currentBullet.ToString();
         maxBulletText.text = maxBullet.ToString();
+
+        //Debug.Log(currentBulletText.text);
+    }
+
+    public void UpdateHealth(int currentHealth)
+    {
+        hpBar.fillAmount = (float) currentHealth / 100f;
 
         //Debug.Log(currentBulletText.text);
     }

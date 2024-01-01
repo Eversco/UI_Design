@@ -52,6 +52,7 @@ public class PlayerStat : MonoBehaviour
     {
         health = healthToSetTo;
         CheckHealth();
+        playerHUD.UpdateHealth(health);
     }
 
     public void TakeDamage(int damage)
