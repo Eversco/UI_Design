@@ -122,6 +122,7 @@ public class PlayerStat : MonoBehaviour
     public void Reload(int reloadback)
     {
         bullets = reloadback;
+        playerHUD.Reloading();
     }
 
     public void Reloaded()

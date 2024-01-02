@@ -56,12 +56,12 @@ public class ThirdPersonShooterController: MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
         if(Physics.Raycast(ray, out RaycastHit rayCastHit, debugRayDistance, aimColliderLayerMask))
         {
-            debugTransform.position = rayCastHit.point;
+            //debugTransform.position = rayCastHit.point;
             mouseWorldPosition = rayCastHit.point;
         }
         else
         {
-            debugTransform.position = Camera.main.transform.position + Camera.main.transform.forward * debugRayDistance;
+            //debugTransform.position = Camera.main.transform.position + Camera.main.transform.forward * debugRayDistance;
             mouseWorldPosition = Camera.main.transform.position + Camera.main.transform.forward * debugRayDistance;
         }
 
@@ -106,7 +106,7 @@ public class ThirdPersonShooterController: MonoBehaviour
             if(starterAssetsInputs.reload)
             {
                 starterAssetsInputs.reload = false;
-                if (currentWeapon.CanReload())
+                if (currentWeapon != null && currentWeapon.CanReload())
                 {
                     currentWeapon.Reload();
                     stat.Reload(currentWeapon.GetClipSize());

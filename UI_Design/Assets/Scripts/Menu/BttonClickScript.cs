@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ButtonClickScript : MonoBehaviour
 {
     [SerializeField] GameObject Menu;
-
+    private bool isMenuActive = false;
     public void StartGameAsHost()
     {
 
@@ -35,9 +35,10 @@ public class ButtonClickScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Menu.SetActive(true);
+            isMenuActive ^= true;
+            Menu.SetActive(isMenuActive);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }

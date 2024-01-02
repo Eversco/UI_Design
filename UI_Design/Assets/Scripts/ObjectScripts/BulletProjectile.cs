@@ -12,8 +12,9 @@ public class BulletProjectile : MonoBehaviour
     protected Rigidbody bulletRigidbody;
     protected float distanceTraveled;
     
+    
 
-    private void Awake()
+    protected virtual void Awake()
     {
         bulletRigidbody = GetComponent<Rigidbody>();
     }
@@ -23,7 +24,7 @@ public class BulletProjectile : MonoBehaviour
         bulletRigidbody.velocity = transform.forward * bulletSpeed;
         distanceTraveled = 0f;
     }
-    private void Update()
+    protected virtual void Update()
     {
         distanceTraveled += Time.deltaTime * bulletSpeed;
         if(distanceTraveled >= maxTravelDistance)

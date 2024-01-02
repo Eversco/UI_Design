@@ -24,7 +24,7 @@ public class RPJ : Weapon
             float x = distance * Mathf.Cos(angle);
             float y = distance * Mathf.Sin(angle);
             
-            Transform bullet = Instantiate(weaponData.bullet, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(new Vector3(x, y, 0)));
+            Transform bullet = Instantiate(weaponData.bullet, muzzlePosition.position, Quaternion.LookRotation(aimDir, Vector3.up)  * Quaternion.Euler(new Vector3(x, y, 0)));
             bullet.GetComponent<RPJBullet>().damage = weaponData.damage;
             //bullet.rotation *= Quaternion.Euler(new Vector3(0, -90, 0));
 

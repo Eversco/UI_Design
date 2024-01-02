@@ -5,11 +5,22 @@ using UnityEngine;
 public class RPJBullet : BulletProjectile
 {
     public float damage;
+    protected override void Awake()
+    {
+        base.Awake();
+        
+
+    }
     protected override void Start()
     {
         base.Start();
-        transform.rotation *= Quaternion.Euler(new Vector3(0, -90, 0));
-        
+        Debug.Log("before: "+transform.rotation.eulerAngles);
+        transform.Rotate(0, -90, 0, relativeTo: Space.Self);
+        Debug.Log("after: " + transform.rotation.eulerAngles);
+    }
+    protected override void Update()
+    {
+        base.Update();
     }
     protected override void OnTriggerEnter(Collider other)
     {
