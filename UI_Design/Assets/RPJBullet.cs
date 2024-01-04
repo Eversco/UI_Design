@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class RPJBullet : BulletProjectile
@@ -57,8 +58,9 @@ public class RPJBullet : BulletProjectile
             IDamagable damagable = hit.GetComponent<IDamagable>();
             if(damagable != null)
             {
-                float distanceMultiplier = (Vector3.Magnitude(hit.transform.position - explosionPoint) / radius) * (Vector3.Magnitude(hit.transform.position - explosionPoint) / radius);
-                damagable.Damage(damage * distanceMultiplier);
+                float distanceMultiplier = (1 - Math.Min((Vector3.Magnitude(hit.transform.position - explosionPoint) / radius), 1f)) * (1 - Math.Min((Vector3.Magnitude(hit.transform.position - explosionPoint) / radius), 1f));
+                float finalDamageMultiplier = Math.Min(distanceMultiplier + 0.2f, 1f);
+                damagable.Damage(damage * finalDamageMultiplier);
             }
         }
     }
